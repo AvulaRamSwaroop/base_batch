@@ -11,14 +11,14 @@ import { contractAddress } from "../../utils/contractAddress";
 import abi from "../../utils/abi.json";
 import { useAccount } from "wagmi";
 import { useState, useCallback, useRef } from "react";
-import type { LifecycleStatus } from "@coinbase/onchainkit/transaction";
+// import type { LifecycleStatus } from "@coinbase/onchainkit/transaction";
 import { toast } from "react-hot-toast";
 
 export default function PetDetails() {
   const { address: currentUserAddress } = useAccount();
   const searchParams = useSearchParams();
   const [hasEvolved, setHasEvolved] = useState(false);
-  const [attributes, setAttributes] = useState<any[]>([]);
+  const [attributes, setAttributes] = useState([]);
   const [petName, setPetName] = useState(
     searchParams.get("name") || "Unnamed Pet"
   );
@@ -30,7 +30,7 @@ export default function PetDetails() {
   const [newBackstory, setNewBackstory] = useState("");
   const [isLoadingBackstory, setIsLoadingBackstory] = useState(false);
   const [showBackstoryUpdate, setShowBackstoryUpdate] = useState(false);
-  const backstoryInputRef = useRef<HTMLTextAreaElement>(null);
+  const backstoryInputRef = useRef < HTMLTextAreaElement > null;
   const petId = searchParams.get("petId");
   const name = searchParams.get("name");
   const imageSrc = searchParams.get("imageSrc");
@@ -47,7 +47,7 @@ export default function PetDetails() {
 
   const isCreator = currentUserAddress?.toLowerCase() === owner?.toLowerCase();
 
-  const extractTxId = (url: string) => url.split("/").pop()!;
+  const extractTxId = (url) => url.split("/").pop();
 
   const handleLevelUp = async () => {
     return [
@@ -97,16 +97,16 @@ export default function PetDetails() {
   //     setCurrentBackstory(newMeta.description);
   //   }
   // };
-  const updateMetadata = async (txId: string, changes: any) => {
+  const updateMetadata = async (txId, changes) => {
     const res = await fetch(`https://gateway.irys.xyz/mutable/${txId}`);
     if (!res.ok) throw new Error("Failed to fetch metadata");
 
     const oldMeta = await res.json();
 
     // Add/increment attributes
-    let updatedAttrs = oldMeta.attributes.map((attr: any) => {
+    let updatedAttrs = oldMeta.attributes.map((attr) => {
       const updated = changes.attributes?.find(
-        (a: any) => a.trait_type === attr.trait_type
+        (a) => a.trait_type === attr.trait_type
       );
       if (updated) {
         return {
@@ -122,7 +122,7 @@ export default function PetDetails() {
     // Add new attributes if not present
     const existingTraits = updatedAttrs.map((a) => a.trait_type);
     const missingAttrs = changes.attributes?.filter(
-      (a: any) => !existingTraits.includes(a.trait_type)
+      (a) => !existingTraits.includes(a.trait_type)
     );
     if (missingAttrs) {
       updatedAttrs = [...updatedAttrs, ...missingAttrs];
@@ -163,7 +163,7 @@ export default function PetDetails() {
   };
 
   const handleEvolveStatus = useCallback(
-    (status: LifecycleStatus) => {
+    (status) => {
       (async () => {
         if (status.statusName === "success" && !hasEvolved) {
           setHasEvolved(true);
@@ -171,39 +171,40 @@ export default function PetDetails() {
           toast.loading("Finalizing evolution...", { id: toastId });
 
           try {
-            const wantsToUpdateBackstory = window.confirm(
-              "Do you want to update the backstory?"
-            );
-            const txId = extractTxId(metadataUrl!);
+            const wantsToUpdateBackstory = false;
+            //  window.confirm(
+            //   "Do you want to update the backstory?"
+            // );
+            const txId = extractTxId(metadataUrl);
 
             let finalBackstory = currentBackstory;
 
-            if (wantsToUpdateBackstory) {
-              const prompt = window.prompt(
-                "How should the backstory evolve?",
-                "E.g., Bloop found a mysterious portal to Meme Mountain..."
-              );
+            // if (wantsToUpdateBackstory) {
+            //   // const prompt = window.prompt(
+            //   //   "How should the backstory evolve?",
+            //   //   "E.g., Bloop found a mysterious portal to Meme Mountain..."
+            //   // );
 
-              if (prompt) {
-                const response = await fetch("/api/generate-backstory", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    originalBackstory: currentBackstory,
-                    prompt: prompt,
-                  }),
-                });
+            //   if (prompt) {
+            //     const response = await fetch("/api/generate-backstory", {
+            //       method: "POST",
+            //       headers: {
+            //         "Content-Type": "application/json",
+            //       },
+            //       body: JSON.stringify({
+            //         originalBackstory: currentBackstory,
+            //         prompt: prompt,
+            //       }),
+            //     });
 
-                if (response.ok) {
-                  const data = await response.json();
-                  finalBackstory = data.modifiedBackstory;
-                } else {
-                  throw new Error("Backstory generation failed");
-                }
-              }
-            }
+            //     if (response.ok) {
+            //       const data = await response.json();
+            //       finalBackstory = data.modifiedBackstory;
+            //     } else {
+            //       throw new Error("Backstory generation failed");
+            //     }
+            //   }
+            // }
 
             // Update metadata with new level and final backstory
             await updateMetadata(txId, {
@@ -350,3 +351,4 @@ export default function PetDetails() {
     </div>
   );
 }
+export const dynamic = "force-dynamic";

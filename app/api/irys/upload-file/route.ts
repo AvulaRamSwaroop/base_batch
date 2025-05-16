@@ -37,6 +37,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       url: `https://gateway.irys.xyz/mutable/${receipt.id}`,
       id: receipt.id,
+      // @ts-expect-error: 'size' may exist depending on backend
       size: receipt.size,
     });
   } catch (e: any) {

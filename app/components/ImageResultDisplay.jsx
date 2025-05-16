@@ -13,13 +13,6 @@ import {
 import abi from "../../utils/abi.json";
 import { contractAddress } from "../../utils/contractAddress";
 
-interface ImageResultDisplayProps {
-  imageUrl: string;
-  backstory: string | null;
-  petName: string | null;
-  onReset: () => void;
-  conversationHistory?: HistoryItem[];
-}
 
 export function ImageResultDisplay({
   imageUrl,
@@ -27,7 +20,7 @@ export function ImageResultDisplay({
   petName,
   onReset,
   conversationHistory = [],
-}: ImageResultDisplayProps) {
+}) {
   const { address, isConnected } = useAccount();
   const [showHistory, setShowHistory] = useState(false);
 
@@ -217,7 +210,7 @@ export function ImageResultDisplay({
                   {item.role === "user" ? "You" : "Gemini"}
                 </p>
                 <div className="space-y-1">
-                  {item.parts.map((part: HistoryPart, partIndex) => (
+                  {item.parts.map((part, partIndex) => (
                     <div key={partIndex}>
                       {part.text && <p className="text-sm">{part.text}</p>}
                       {part.image && (

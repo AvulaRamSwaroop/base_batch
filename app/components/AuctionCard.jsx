@@ -14,7 +14,7 @@ import {
 } from "@coinbase/onchainkit/transaction";
 import { contractAddress } from "../../utils/contractAddress";
 import abi from "../../utils/abi.json";
-import type { LifecycleStatus } from "@coinbase/onchainkit/transaction";
+// import type { LifecycleStatus } from "@coinbase/onchainkit/transaction";
 
 export default function PetCard({
   petId,
@@ -23,9 +23,9 @@ export default function PetCard({
   metadataUrl,
   multiplier,
   NftLevel,
-}: any) {
+}) {
   const router = useRouter();
-  const [attributes, setAttributes] = useState<any[]>([]);
+  const [attributes, setAttributes] = useState([]);
   const [petName, setPetName] = useState("Unnamed Pet");
   const [description, setDescription] = useState("");
   const [backstory, setBackstory] = useState("");
@@ -33,7 +33,7 @@ export default function PetCard({
   const [hasFed, setHasFed] = useState(false);
   const [hasTrained, setHasTrained] = useState(false);
 
-  const extractTxId = (url: string) => url.split("/").pop()!;
+  const extractTxId = (url) => url.split("/").pop();
 
   useEffect(() => {
     const fetchMetadata = async () => {
@@ -55,14 +55,14 @@ export default function PetCard({
     fetchMetadata();
   }, [metadataUrl]);
 
-  const updateMetadata = async (txId: string, changes: any) => {
+  const updateMetadata = async (txId, changes) => {
     const res = await fetch(`https://gateway.irys.xyz/mutable/${txId}`);
     if (!res.ok) throw new Error("Failed to fetch metadata");
     const oldMeta = await res.json();
 
-    const updatedAttrs = oldMeta.attributes.map((attr: any) => {
+    const updatedAttrs = oldMeta.attributes.map((attr) => {
       const updated = changes.attributes?.find(
-        (a: any) => a.trait_type === attr.trait_type
+        (a) => a.trait_type === attr.trait_type
       );
       if (updated) {
         return {
@@ -178,7 +178,7 @@ export default function PetCard({
   };
 
   const handleFeedStatus = useCallback(
-    async (status: LifecycleStatus) => {
+    async (status) => {
       if (status.statusName === "success" && !hasFed) {
         setHasFed(true);
         const toastId = "feed-status";
@@ -203,7 +203,7 @@ export default function PetCard({
   );
 
   const handleTrainStatus = useCallback(
-    async (status: LifecycleStatus) => {
+    async (status) => {
       if (status.statusName === "success" && !hasTrained) {
         setHasTrained(true);
         const toastId = "train-status";
@@ -245,9 +245,10 @@ export default function PetCard({
               className="bg-green-500 hover:bg-green-600 text-white p-2 rounded-sm text-sm font-semibold font-courier-prime"
             />
           </Transaction>
+
           <Transaction
-            chainId={8453}
             calls={train}
+            chainId={8453}
             onStatus={handleTrainStatus}
           >
             <TransactionButton
