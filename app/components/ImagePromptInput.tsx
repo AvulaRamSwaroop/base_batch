@@ -27,9 +27,9 @@ export function ImagePromptInput({
     "Sketch",
     "Cartoon",
   ];
-  
+
   const [artStyle, setArtStyle] = useState("Default");
-  
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (prompt.trim()) {
@@ -40,9 +40,12 @@ export function ImagePromptInput({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-1.5 rounded-lg font-courier-prime">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-1.5 rounded-lg font-courier-prime "
+    >
       <div className="space-y-2">
-        <p className="text-md font-bold text-foreground text-pixelify">
+        <p className="text-md font-bold text-black text-pixelify">
           {isEditing
             ? "Describe how you want to edit the image"
             : "Describe the image you want to generate"}
@@ -61,11 +64,11 @@ export function ImagePromptInput({
         onChange={(e) => setPrompt(e.target.value)}
       />
       <div className="space-y-2">
-        <p className="text-md font-bold text-foreground">Art Style</p>
+        <p className="text-md font-bold text-black">Art Style</p>
         <select
           value={artStyle}
           onChange={(e) => setArtStyle(e.target.value)}
-          className="w-full border rounded-md p-2 bg-background border-secondary"
+          className="w-full border rounded-md p-2 bg-background border-secondary text-white"
         >
           {artStyles.map((style) => (
             <option key={style} value={style}>
@@ -74,9 +77,8 @@ export function ImagePromptInput({
           ))}
         </select>
       </div>
-
       <div className="space-y-2">
-        <p className="text-md font-bold text-foreground">
+        <p className="text-md font-bold text-black">
           {isEditing
             ? "Describe how you want to edit the backstory"
             : "Describe the backstory of the pet"}
@@ -97,9 +99,9 @@ export function ImagePromptInput({
       <Button
         type="submit"
         disabled={!prompt.trim() || isLoading}
-        className="w-full bg-[#C9C9AA] font-pixelify hover:bg-[#C9C9AA]/80 disabled:opacity-50"
+        className="w-full bg-black text-white font-pixelify font-size-16 hover:bg-[#C9C9AA]/80 disabled:opacity-50"
       >
-        <Wand2 className="w-4 h-4 mr-2" />
+        <Wand2 className="w-4 h-4 mr-2 " />
         {isEditing ? "Edit Image" : "Generate Image"}
       </Button>
     </form>

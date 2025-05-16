@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { JsonRpcProvider, Contract } from "ethers";
-import abi from "../../utils/abi.json";
+import abi from "../../public/utils/abi.json";
 
-import { contractAddress } from "../../utils/contractAddress";
+import { contractAddress } from "../../public/utils/contractAddress";
 
 export default function TrendingPage() {
   const [nfts, setNfts] = useState([]);
@@ -132,6 +132,27 @@ export default function TrendingPage() {
               </table>
             </div>
           )}
+          <div className="w-4/5 mx-auto mt-6 mb-8 p-4 bg-blue-100 border-l-4 border-blue-400 rounded text-blue-900 text-center text-lg font-semibold shadow">
+            <span>View the collectibles on </span>
+            <a
+              href="https://opensea.io/collection/basehackathonproject"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-700 underline hover:text-blue-500 mx-1"
+            >
+              OpenSea
+            </a>
+            <span>and</span>
+            <a
+              href="https://basescan.org/nft/0xedea62d0b0561c81b60b1eb5b13aa568174a242d/7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-700 underline hover:text-blue-500 mx-1"
+            >
+              BaseScan
+            </a>
+            <span>!</span>
+          </div>
         </div>
       </div>
     </div>

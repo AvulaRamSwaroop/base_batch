@@ -10,9 +10,8 @@ import {
   TransactionButton,
   TransactionToast,
 } from "@coinbase/onchainkit/transaction";
-import abi from "../../utils/abi.json";
-import { contractAddress } from "../../utils/contractAddress";
-
+import abi from "../../public/utils/abi.json";
+import { contractAddress } from "../../public/utils/contractAddress";
 
 export function ImageResultDisplay({
   imageUrl,

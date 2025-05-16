@@ -12,8 +12,8 @@ import {
   TransactionToastAction,
   TransactionToastLabel,
 } from "@coinbase/onchainkit/transaction";
-import { contractAddress } from "../../utils/contractAddress";
-import abi from "../../utils/abi.json";
+import { contractAddress } from "../../public/utils/contractAddress";
+import abi from "../../public/utils/abi.json";
 // import type { LifecycleStatus } from "@coinbase/onchainkit/transaction";
 
 export default function PetCard({

@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { BrowserProvider, Contract, JsonRpcProvider } from "ethers";
 import PetCard from "../components/AuctionCard";
-import abi from "../../utils/abi.json";
+import abi from "../../public/utils/abi.json";
 import { ethers } from "ethers";
-import { contractAddress } from "../../utils/contractAddress";
+import { contractAddress } from "../../public/utils/contractAddress";
 
 export default function HomepagePreview() {
   const [nfts, setNfts] = useState([]);

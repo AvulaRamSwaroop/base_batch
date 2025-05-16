@@ -7,8 +7,8 @@ import {
   Transaction,
   TransactionButton,
 } from "@coinbase/onchainkit/transaction";
-import { contractAddress } from "../../utils/contractAddress";
-import abi from "../../utils/abi.json";
+import { contractAddress } from "../../public/utils/contractAddress";
+import abi from "../../public/utils/abi.json";
 import { useAccount } from "wagmi";
 import { useState, useCallback, useRef } from "react";
 // import type { LifecycleStatus } from "@coinbase/onchainkit/transaction";
@@ -172,39 +172,37 @@ export default function PetDetails() {
 
           try {
             const wantsToUpdateBackstory = false;
-            //  window.confirm(
-            //   "Do you want to update the backstory?"
-            // );
+            window.confirm("Do you want to update the backstory?");
             const txId = extractTxId(metadataUrl);
 
             let finalBackstory = currentBackstory;
 
-            // if (wantsToUpdateBackstory) {
-            //   // const prompt = window.prompt(
-            //   //   "How should the backstory evolve?",
-            //   //   "E.g., Bloop found a mysterious portal to Meme Mountain..."
-            //   // );
+            if (wantsToUpdateBackstory) {
+              const prompt = window.prompt(
+                "How should the backstory evolve?",
+                "E.g., Bloop found a mysterious portal to Meme Mountain..."
+              );
 
-            //   if (prompt) {
-            //     const response = await fetch("/api/generate-backstory", {
-            //       method: "POST",
-            //       headers: {
-            //         "Content-Type": "application/json",
-            //       },
-            //       body: JSON.stringify({
-            //         originalBackstory: currentBackstory,
-            //         prompt: prompt,
-            //       }),
-            //     });
+              if (prompt) {
+                const response = await fetch("/api/generate-backstory", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    originalBackstory: currentBackstory,
+                    prompt: prompt,
+                  }),
+                });
 
-            //     if (response.ok) {
-            //       const data = await response.json();
-            //       finalBackstory = data.modifiedBackstory;
-            //     } else {
-            //       throw new Error("Backstory generation failed");
-            //     }
-            //   }
-            // }
+                if (response.ok) {
+                  const data = await response.json();
+                  finalBackstory = data.modifiedBackstory;
+                } else {
+                  throw new Error("Backstory generation failed");
+                }
+              }
+            }
 
             // Update metadata with new level and final backstory
             await updateMetadata(txId, {

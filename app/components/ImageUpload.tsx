@@ -21,7 +21,11 @@ export function formatFileSize(bytes: number): string {
   );
 }
 
-export function ImageUpload({ onImageSelect, currentImage, onError }: ImageUploadProps) {
+export function ImageUpload({
+  onImageSelect,
+  currentImage,
+  onError,
+}: ImageUploadProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -68,10 +72,10 @@ export function ImageUpload({ onImageSelect, currentImage, onError }: ImageUploa
     onDrop,
     accept: {
       "image/png": [".png"],
-      "image/jpeg": [".jpg", ".jpeg"]
+      "image/jpeg": [".jpg", ".jpeg"],
     },
     maxSize: 10 * 1024 * 1024, // 10MB
-    multiple: false
+    multiple: false,
   });
 
   const handleRemove = () => {
@@ -80,7 +84,7 @@ export function ImageUpload({ onImageSelect, currentImage, onError }: ImageUploa
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full text-black">
       {!currentImage ? (
         <div
           {...getRootProps()}
@@ -94,12 +98,15 @@ export function ImageUpload({ onImageSelect, currentImage, onError }: ImageUploa
         >
           <input {...getInputProps()} />
           <div className="flex flex-row items-center" role="presentation">
-            <UploadIcon className="w-8 h-8 text-primary mr-3 flex-shrink-0" aria-hidden="true" />
+            <UploadIcon
+              className="w-8 h-8 text-primary mr-3 flex-shrink-0"
+              aria-hidden="true"
+            />
             <div className="font-courier-prime">
-              <p className="text-sm font-medium text-foreground">
+              <p className="text-sm font-medium text-black">
                 Drop your image here or click to browse
               </p>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-muted-foreground text-black">
                 Maximum file size: 10MB
               </p>
             </div>
@@ -108,7 +115,10 @@ export function ImageUpload({ onImageSelect, currentImage, onError }: ImageUploa
       ) : (
         <div className="flex flex-col items-center p-4 rounded-lg bg-secondary">
           <div className="flex w-full items-center mb-4">
-            <ImageIcon className="w-8 h-8 text-primary mr-3 flex-shrink-0" aria-hidden="true" />
+            <ImageIcon
+              className="w-8 h-8 text-primary mr-3 flex-shrink-0"
+              aria-hidden="true"
+            />
             <div className="flex-grow min-w-0">
               <p className="text-sm font-medium truncate text-foreground">
                 {selectedFile?.name || "Current Image"}
