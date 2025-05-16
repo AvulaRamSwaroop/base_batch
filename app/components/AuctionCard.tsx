@@ -60,7 +60,7 @@ export default function PetCard({
     if (!res.ok) throw new Error("Failed to fetch metadata");
     const oldMeta = await res.json();
 
-    let updatedAttrs = oldMeta.attributes.map((attr: any) => {
+    const updatedAttrs = oldMeta.attributes.map((attr: any) => {
       const updated = changes.attributes?.find(
         (a: any) => a.trait_type === attr.trait_type
       );
