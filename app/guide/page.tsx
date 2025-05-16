@@ -61,7 +61,7 @@ export default function Page() {
               <ul className="list-disc ml-6 space-y-1">
                 <li>When <b>points ≥ 20 × current level</b>, your pet can evolve to the next stage.</li>
                 <li>Each evolution adds new twists to its backstory and makes your NFT pet even more special.</li>
-                <li>Your NFT pet's journey continues and grows with time!</li>
+                <li>Your NFT pet journey continues and grows with time!</li>
               </ul>
             </div>
             {/* Step 6 */}
