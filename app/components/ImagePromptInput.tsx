@@ -77,6 +77,7 @@ export function ImagePromptInput({
           ))}
         </select>
       </div>
+
       <div className="space-y-2">
         <p className="text-md font-bold text-black">
           {isEditing
