@@ -129,7 +129,7 @@ export function ImageResultDisplay({
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 text-black">
       <div className="flex flex-col md:flex-row justify-between space-x-0 md:space-x-10">
         <div className="rounded-lg bg-muted p-1">
           <img
@@ -141,14 +141,12 @@ export function ImageResultDisplay({
 
         <div className="flex flex-col">
           <div className="p-1 rounded-lg bg-muted">
-            <h1 className="text-2xl text-muted-foreground font-pixelify">
-              {petName}
-            </h1>
+            <h1 className="text-2xl text-black font-pixelify">{petName}</h1>
           </div>
 
           <div className="p-1 rounded-lg bg-muted">
             <h3 className="text-xl font-medium mb-2 font-pixelify">Lore-</h3>
-            <p className="text-md text-muted-foreground font-courier-prime">
+            <p className="text-md text-black font-courier-prime ">
               {backstory}
             </p>
           </div>
@@ -196,14 +194,14 @@ export function ImageResultDisplay({
       </div>
 
       {showHistory && conversationHistory.length > 0 && (
-        <div className="p-4 rounded-lg font-courier-prime">
+        <div className="p-4 rounded-lg font-courier-prim">
           <h3 className="text-sm font-medium mb-2">Conversation History</h3>
           <div className="space-y-4">
             {conversationHistory.map((item, index) => (
               <div key={index} className={`p-3 rounded-lg bg-secondary`}>
                 <p
                   className={`text-sm font-medium mb-1 ${
-                    item.role === "user" ? "text-foreground" : "text-primary"
+                    item.role === "user" ? "text-black" : "text-primary"
                   }`}
                 >
                   {item.role === "user" ? "You" : "Gemini"}

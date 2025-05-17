@@ -141,10 +141,8 @@ export default function GenerateImage() {
               role="status"
               className="flex items-center mx-auto justify-center h-56 max-w-sm bg-gray-300 rounded-lg animate-pulse dark:bg-secondary"
             >
-              <ImageIcon className="w-10 h-10 text-gray-200 dark:text-muted-foreground" />
-              <span className="pl-4 font-mono text-muted-foreground">
-                Processing...
-              </span>
+              <ImageIcon className="w-10 h-10 text-black dark:text-muted-black" />
+              <span className="pl-4 font-mono text-black">Processing...</span>
             </div>
           ) : (
             <>
