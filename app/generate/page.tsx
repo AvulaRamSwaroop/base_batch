@@ -102,7 +102,7 @@ export default function GenerateImage() {
   const displayImage = generatedImage;
 
   return (
-    <div className="relative min-h-screen w-full text-black ">
+    <div className="relative min-h-screen w-full">
       <div
         className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat "
         style={{ backgroundImage: "url(/bg-gen.png)" }}
